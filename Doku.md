@@ -1,8 +1,10 @@
 # Projekt: Umzug
 
-## Anforderungsanalyse
+## Teil 1: Netzwerk
 
-### Ist-Zustand
+### Anforderungsanalyse
+
+#### Ist-Zustand
 
 - Kleinunternehmen
 - 5 MitarbeiterInnen
@@ -12,14 +14,14 @@
   - Alle Rechner über einen Switch an Router angebunden
   - Alle Geräte manuell konfiguriert
 
-### Soll-Zustand
+#### Soll-Zustand
 
 - Zweite Etage wird angemietet
 - Dynamische Vergabe der IPs an alle Geräte
 - Etagen sollen in jeweils eigenem Netzwerk liegen
 - Alle Geräte sollen Internetzugang haben → Verbindung mit Router
 
-### Offene Fragen
+#### Offene Fragen
 
 - Gibt es Vorschriften zu der Art der Verbindung? WLAN? LAN?
   - Vorschlag: LAN
@@ -28,7 +30,7 @@
       - Höhere Bandbreite
     - Contra
       - Höherer Aufwand (Kabel verlegen, evtl Anpassungen am Gebäude)
-      - Expansion undynamischer (→ erfordert zukunftssicherere Planung, ansonsten k)
+      - Expansion undynamischer (→ erfordert zukunftssicherere Planung)
 - Wird mit neuen MitarbeiterInnen gerechnet?
   - Wenn ja, wie viele Geräte können in den Etagen jeweils vorhanden sein? (→ maximale Größe der nötigen Switches bestimmen, um zukunfssicher zu planen)
 - Wird es innerhalb der Etagen Abteilungen geben, die nochmal in einem jeweils eigenen Subnetz liegen sollen?
@@ -39,6 +41,10 @@
   - Falls ja, Prüfen, ob genug Host-IP-Adressen vorhanden sind um die nötigen ausreichend Subnetze einzurichten
   - Ansonsten: Freie Wahl? Vorschriften?
 
-## Netzplan
+### Netzplan
 
-## Demonstrationsprototyp PaketTracer
+Warten auf offene Fragen
+
+### Demonstrationsprototyp PaketTracer
+
+Warten auf offene Fragen
