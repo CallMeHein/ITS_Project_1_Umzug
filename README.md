@@ -28,7 +28,7 @@
   - Redundanz beim Konfigurieren der Netzwerke für die Abteilungen einplanen, um weitere Expansion einfach zu gestalten
 - Etagen sollen in jeweils eigenem Netzwerk liegen
   - Zwei Abteilungen pro Etage, jeweils in einem eigenen Netz
-  - Ein Netzwerkdrucker pro Etage 
+  - Ein Netzwerkdrucker pro Etage
 - Dynamische Vergabe der IPs an alle Geräte
 
 ### Netzplan
