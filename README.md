@@ -51,7 +51,16 @@ Folgende Subnetze werden konfiguriert:
 | 192.168.2.240 / 29 | 192.168.2.240 | 192.168.2.247 | 8          | 5            | Druckerraum OG        |
 | 192.168.2.248 / 29 | 192.168.2.248 | 192.168.2.255 | 8          | 5            | Konferenzraum         |
 
-Der Konferenzraum wird mit einem WLAN-Router ausgestattet, dessen Konfiguration folgt.
+<br>
+
+Für den Konferenzraum werden zwei weitere Router benötigt, die mit je einem Access-Point das Gast- bzw. interne Netz aufspannen.
+
+Dafür werden folgende Netze verwendet:
+
+| Netzadresse       | IP von       | IP bis        | Anzahl IPs | Anzahl Hosts | Verwendung      |
+|-------------------|--------------|---------------|------------|--------------|-----------------|
+| 192.168.3.0 / 26  | 192.168.3.0  | 192.168.3.63  | 64         | 61           | Gastzugang      |
+| 192.168.3.64 / 26 | 192.168.3.64 | 192.168.3.127 | 64         | 61           | interner Zugang |
 
 <br>
 
