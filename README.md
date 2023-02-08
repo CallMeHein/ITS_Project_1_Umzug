@@ -115,4 +115,25 @@ Siehe `./Network/Layout.pkt`
 | Änderungen und Abfragen erfolgen durch Sperren der gesamten Datei -> mehrere parallele Verbindungen nicht möglich                                                          | Änderungen und Abfragen werden vom Server abgefangen und optimisiert -> mehrere parallele Verbindungen möglich      |
 | Schnell, wenn Datenbank auf eigener Maschine liegt. Langsam, wenn Daten auf einer anderen Maschine liegt, da die ganze Datenbank über das Netzwerk übertragen werden muss. | Abfragen werden auf dem Server ausgewertet und nur das Ergebnis wird übertragen -> geringere Belastung des Netzwerks |
 
-Um zukunfstsicher zu planen entscheiden wir uns für einen MySQL Server, da dieser recht simpel zu verwenden ist und mehrere parallele Verbindungen unterstützt.
+Um zukunfstsicher zu planen entscheiden wir uns für einen MySQL Server, da dieser recht simpel zu verwenden ist und mehrere parallele Verbindungen unterstützt. Somit können ggf. mehrere Admins für die Benutzerverwaltung zuständig sein.
+
+---
+
+### Ermittlung und Beschreibung der notwendigen Daten
+
+#### Quellen der Daten
+
+- Programm, um Änderungsanträge einzureichen (Person, Account, Recht/Rolle, Begründung).
+- Diese werden ebenfalls in der Datenbank hinterlegt und können im Admin-Programm angenomen/abgelehnt werden.
+
+---
+
+### Entity-Relationship-Modell
+
+```mermaid
+  %%{ init: { 'flowchart': { 'curve': '' } } }%%
+  graph LR;
+      A[Person]-- N --- B{Recht};
+      A -- N --- C{Anfrage};
+      B & C -- 1 --- D[Rolle]
+```
