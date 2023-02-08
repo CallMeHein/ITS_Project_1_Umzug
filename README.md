@@ -77,4 +77,63 @@ Folgende Subnetze werden nicht benötigt und können somit in Zukunft verwendet 
 
 ### Demonstrationsprototyp PaketTracer
 
-Work in Progress. Siehe `./Network/Layout.pkt`
+Siehe `./Network/Layout.pkt`
+
+
+## Teil 2: Datenbank
+
+---
+
+### Anforderungsanalyse
+
+#### Ist-Zustand
+
+- Meisten Informationen werden im Unternehmen digital erfasst, stammen aber aus vielen verschiedenen Quellen (Textverarbeitung, Tabellen, Email, Scan, etc.)
+
+#### Soll-Zustand
+
+- Umstellung auf einheitliches Datenbanksystem
+  - Erster Schritt: Benutzerverwaltungssoftware erneuern
+    - Erfassen der Mitarbeiterdaten in der Datenbank
+    - CRUD (Create, Read, Update, Delete) Funktionalität
+    - Export der Daten im JSON Format, zur Weitergabe an den Verzeichnisdienst
+
+---
+
+### Auswahl der Datenbank
+
+#### Aufbau einer relationalen Datenbank
+
+- Sammlung von Tabellen mit Datensätzen ("Zeilen")
+- Jede Zeile enthält bestimmte Attribute (Eigenschaften), die die Spalten der Tabelle bilden (z.B ID, Bezeichnung, etc.)
+- Verknüpfungen zwischen Tabellen können hergestellt werden, indem ein Attribut aus Tabelle A in Tabelle B übernommen wird und durch Abfragen (z.B mit SQL) abgefragt werden
+
+#### Fileshared vs. Datenbankserver
+| Fileshared                                                                                                                                                                 | Server                                                                                                              |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Datenbank liegt als **eine** Datei auf einer Maschine vor                                                                                                                  | Datenbank wird in mehrere Dateien (z.B. je Tabelle) unterteilt                                                      |
+| Änderungen und Abfragen erfolgen durch Sperren der gesamten Datei -> mehrere parallele Verbindungen nicht möglich                                                          | Änderungen und Abfragen werden vom Server abgefangen und optimisiert -> mehrere parallele Verbindungen möglich      |
+| Schnell, wenn Datenbank auf eigener Maschine liegt. Langsam, wenn Daten auf einer anderen Maschine liegt, da die ganze Datenbank über das Netzwerk übertragen werden muss. | Abfragen werden auf dem Server ausgewertet und nur das Ergebnis wird übertragen -> geringere Belastung des Netzwerks |
+
+Um zukunfstsicher zu planen entscheiden wir uns für einen MySQL Server, da dieser recht simpel zu verwenden ist und mehrere parallele Verbindungen unterstützt. Somit können ggf. mehrere Admins für die Benutzerverwaltung zuständig sein.
+
+---
+
+### Ermittlung und Beschreibung der notwendigen Daten
+
+#### Quellen der Daten
+
+- Programm, um Änderungsanträge einzureichen (Person, Account, Recht/Rolle, Begründung).
+- Diese werden ebenfalls in der Datenbank hinterlegt und können im Admin-Programm angenomen/abgelehnt werden.
+
+---
+
+### Entity-Relationship-Modell
+
+```mermaid
+  %%{ init: { 'flowchart': { 'curve': '' } } }%%
+  graph LR;
+      A[Person]-- N --- B{Recht};
+      A -- N --- C{Anfrage};
+      B & C -- 1 --- D[Rolle]
+```
