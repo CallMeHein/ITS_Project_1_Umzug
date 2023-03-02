@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `hein_benutzerverwaltung` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `hein_benutzerverwaltung`;
--- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: hein_benutzerverwaltung
+-- Host: localhost    Database: hein_benutzerverwaltung
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,6 +18,32 @@ USE `hein_benutzerverwaltung`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `abteilungen`
+--
+
+DROP TABLE IF EXISTS `abteilungen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `abteilungen` (
+  `id_abteilung` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  PRIMARY KEY (`id_abteilung`),
+  UNIQUE KEY `id_abteilung_UNIQUE` (`id_abteilung`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `abteilungen`
+--
+
+LOCK TABLES `abteilungen` WRITE;
+/*!40000 ALTER TABLE `abteilungen` DISABLE KEYS */;
+INSERT INTO `abteilungen` VALUES (2,'Datenbanken'),(1,'IT-Sicherheit'),(3,'Java-Entwicklung');
+/*!40000 ALTER TABLE `abteilungen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `personen`
 --
 
@@ -26,9 +52,10 @@ DROP TABLE IF EXISTS `personen`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personen` (
   `id_person` int NOT NULL AUTO_INCREMENT,
-  `vorname` varchar(100) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `nachname` varchar(100) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `name` varchar(200) COLLATE utf8mb4_0900_as_cs GENERATED ALWAYS AS (concat_ws(_utf8mb4', ',`nachname`,`vorname`)) STORED,
+  `vorname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `nachname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs GENERATED ALWAYS AS (concat_ws(_utf8mb4', ',`nachname`,`vorname`)) STORED,
+  `id_abteilung` int DEFAULT NULL,
   PRIMARY KEY (`id_person`),
   UNIQUE KEY `vorname_UNIQUE` (`vorname`),
   UNIQUE KEY `nachname_UNIQUE` (`nachname`),
@@ -43,7 +70,7 @@ CREATE TABLE `personen` (
 
 LOCK TABLES `personen` WRITE;
 /*!40000 ALTER TABLE `personen` DISABLE KEYS */;
-INSERT INTO `personen` (`id_person`, `vorname`, `nachname`) VALUES (1,'Gabriel','Roth'),(2,'Romy','Martz'),(3,'Fynn','Lenz');
+INSERT INTO `personen` (`id_person`, `vorname`, `nachname`, `id_abteilung`) VALUES (1,'Gabriel','Roth',1),(2,'Romy','Martz',2),(3,'Fynn','Lenz',3);
 /*!40000 ALTER TABLE `personen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,9 +83,9 @@ DROP TABLE IF EXISTS `requests`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `requests` (
   `id_request` int NOT NULL AUTO_INCREMENT,
-  `id_person` varchar(100) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `id_rolle` varchar(100) COLLATE utf8mb4_0900_as_cs NOT NULL,
-  `grund` varchar(300) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `id_person` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `id_rolle` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `grund` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   PRIMARY KEY (`id_request`),
   UNIQUE KEY `id_requests_UNIQUE` (`id_request`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
@@ -83,11 +110,11 @@ DROP TABLE IF EXISTS `rollen`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rollen` (
   `id_rolle` int NOT NULL AUTO_INCREMENT,
-  `bezeichnung` varchar(100) COLLATE utf8mb4_0900_as_cs NOT NULL,
+  `bezeichnung` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL,
   PRIMARY KEY (`id_rolle`),
   UNIQUE KEY `idrollen_UNIQUE` (`id_rolle`),
   UNIQUE KEY `bezeichnung_UNIQUE` (`bezeichnung`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +123,7 @@ CREATE TABLE `rollen` (
 
 LOCK TABLES `rollen` WRITE;
 /*!40000 ALTER TABLE `rollen` DISABLE KEYS */;
-INSERT INTO `rollen` VALUES (1,'Admin'),(2,'Lehrer'),(3,'Schüler');
+INSERT INTO `rollen` VALUES (1,'Admin'),(3,'CEO'),(4,'Mitarbeiter'),(2,'Teamleiter');
 /*!40000 ALTER TABLE `rollen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-12 15:47:12
+-- Dump completed on 2023-02-15 10:23:02

@@ -2,7 +2,8 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using Microsoft.VisualBasic;
+using System.Collections;
 
 namespace Database {
     public partial class Form1 : Form {
@@ -410,6 +411,8 @@ namespace Database {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void bRolleZuweisen_Click(object sender, EventArgs e) {
+
+            // Prüfen ob Zuweisung getätigt werden kann
             string error = "Fehler beim Zuweisen der Rolle";
             if (this.cbPerson.Text == "") {
                 MessageBox.Show("Keine Person ausgewählt", error);
@@ -442,13 +445,15 @@ namespace Database {
                 return;
             }
             data.Close();
-
+            
+            // Zuweisung wird erstellt
             cmd.CommandText = $"INSERT INTO zuweisungen (id_person, id_rolle) VALUES ({id_person},{id_rolle})";
             cmd.ExecuteNonQuery();
             bRollenListen_Click(null, null);
         }
 
         private void bZuweisungEntfernen_Click(object sender, EventArgs e) {
+            // Prüfen, ob die gewählte Zuweisung entfernt werden kann
             string error = "Fehler beim Löschen der Zuweisung";
             if (this.cbPerson.Text == "") {
                 MessageBox.Show("Keine Person ausgewählt", error);
@@ -482,9 +487,45 @@ namespace Database {
             }
             data.Close();
 
+            // Zuweisung wird gelöscht
             cmd.CommandText = $"DELETE FROM zuweisungen WHERE id_person = {id_person} AND id_rolle = {id_rolle}";
             cmd.ExecuteNonQuery();
             bRollenListen_Click(null, null);
+        }
+
+        private void bAnfragenAnnehmen_Click(object sender, EventArgs e) {
+            // Daten aus der gewählten Rolle holen
+            DataGridViewRow row = dgvTabelle.SelectedRows[0];
+            ArrayList selectedRow = new ArrayList();
+            foreach (DataGridViewCell cell in row.Cells) {
+                string value = cell.Value.ToString();
+                selectedRow.Add(value);
+            }
+            // Zuweisung erstellen
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = this.mySqlConnection;
+            cmd.CommandText = $"INSERT INTO zuweisungen (id_person, id_rolle) VALUES ({selectedRow[1]}, {selectedRow[3]})";
+            cmd.ExecuteNonQuery();
+            // Anfrage löschen
+            cmd.CommandText = $"DELETE FROM requests WHERE id_request = {selectedRow[0]}";
+            cmd.ExecuteNonQuery();
+            AlleRequestsAnzeigen(null, null);
+        }
+
+        private void bAnfragenAblehnen_Click(object sender, EventArgs e) {
+            // Daten aus der gewählten Reihe holen
+            DataGridViewRow row = dgvTabelle.SelectedRows[0];
+            ArrayList selectedRow = new ArrayList();
+            foreach (DataGridViewCell cell in row.Cells) {
+                string value = cell.Value.ToString();
+                selectedRow.Add(value);
+            }
+            // Anfrage löschen
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = this.mySqlConnection;
+            cmd.CommandText = $"DELETE FROM requests WHERE id_request = {selectedRow[0]}";
+            cmd.ExecuteNonQuery();
+            AlleRequestsAnzeigen(null, null);
         }
     }
 }

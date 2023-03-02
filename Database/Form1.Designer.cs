@@ -44,6 +44,7 @@
             this.ttRolleEntfernen = new System.Windows.Forms.ToolTip(this.components);
             this.ttRolleZuweisen = new System.Windows.Forms.ToolTip(this.components);
             this.bAlleZuweisungenAnzeigen = new System.Windows.Forms.Button();
+            this.bZuweisungEntfernen = new System.Windows.Forms.Button();
             this.ttPersonenComboBox = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpVerwaltung = new System.Windows.Forms.TabPage();
@@ -62,7 +63,6 @@
             this.lbUser = new System.Windows.Forms.Label();
             this.lbConnectionError = new System.Windows.Forms.Label();
             this.gbConnection = new System.Windows.Forms.GroupBox();
-            this.bZuweisungEntfernen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabelle)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tpVerwaltung.SuspendLayout();
@@ -216,6 +216,18 @@
             this.bAlleZuweisungenAnzeigen.UseVisualStyleBackColor = true;
             this.bAlleZuweisungenAnzeigen.Click += new System.EventHandler(this.AlleZuweisungenAnzeigen);
             // 
+            // bZuweisungEntfernen
+            // 
+            this.bZuweisungEntfernen.Location = new System.Drawing.Point(699, 95);
+            this.bZuweisungEntfernen.Name = "bZuweisungEntfernen";
+            this.bZuweisungEntfernen.Size = new System.Drawing.Size(116, 21);
+            this.bZuweisungEntfernen.TabIndex = 12;
+            this.bZuweisungEntfernen.Text = "Zuweisung entfernen";
+            this.ttRolleZuweisen.SetToolTip(this.bZuweisungEntfernen, "Weist der gewählten Person die gewählt Rolle zu, wenn sie diese nicht bereits bes" +
+        "itzt.");
+            this.bZuweisungEntfernen.UseVisualStyleBackColor = true;
+            this.bZuweisungEntfernen.Click += new System.EventHandler(this.bZuweisungEntfernen_Click);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tpVerwaltung);
@@ -273,6 +285,7 @@
             this.bAnfragenAblehnen.TabIndex = 2;
             this.bAnfragenAblehnen.Text = "Gewählte Anfrage(n) ablehnen";
             this.bAnfragenAblehnen.UseVisualStyleBackColor = true;
+            this.bAnfragenAblehnen.Click += new System.EventHandler(this.bAnfragenAblehnen_Click);
             // 
             // bAnfragenAnnehmen
             // 
@@ -282,6 +295,7 @@
             this.bAnfragenAnnehmen.TabIndex = 1;
             this.bAnfragenAnnehmen.Text = "Gewählte Anfrage(n) annehmen";
             this.bAnfragenAnnehmen.UseVisualStyleBackColor = true;
+            this.bAnfragenAnnehmen.Click += new System.EventHandler(this.bAnfragenAnnehmen_Click);
             // 
             // bAnfragenAktualisieren
             // 
@@ -398,18 +412,6 @@
             this.gbConnection.Size = new System.Drawing.Size(786, 66);
             this.gbConnection.TabIndex = 12;
             this.gbConnection.TabStop = false;
-            // 
-            // bZuweisungEntfernen
-            // 
-            this.bZuweisungEntfernen.Location = new System.Drawing.Point(699, 95);
-            this.bZuweisungEntfernen.Name = "bZuweisungEntfernen";
-            this.bZuweisungEntfernen.Size = new System.Drawing.Size(116, 21);
-            this.bZuweisungEntfernen.TabIndex = 12;
-            this.bZuweisungEntfernen.Text = "Zuweisung entfernen";
-            this.ttRolleZuweisen.SetToolTip(this.bZuweisungEntfernen, "Weist der gewählten Person die gewählt Rolle zu, wenn sie diese nicht bereits bes" +
-        "itzt.");
-            this.bZuweisungEntfernen.UseVisualStyleBackColor = true;
-            this.bZuweisungEntfernen.Click += new System.EventHandler(this.bZuweisungEntfernen_Click);
             // 
             // Form1
             // 
