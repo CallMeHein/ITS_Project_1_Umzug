@@ -79,6 +79,7 @@ Folgende Subnetze werden nicht benötigt und können somit in Zukunft verwendet 
 
 Siehe `./Network/Layout.pkt`
 
+<br>
 
 ## Teil 2: Datenbank
 
@@ -108,6 +109,8 @@ Siehe `./Network/Layout.pkt`
 - Jede Zeile enthält bestimmte Attribute (Eigenschaften), die die Spalten der Tabelle bilden (z.B ID, Bezeichnung, etc.)
 - Verknüpfungen zwischen Tabellen können hergestellt werden, indem ein Attribut aus Tabelle A in Tabelle B übernommen wird und durch Abfragen (z.B mit SQL) abgefragt werden
 
+<br>
+
 #### Fileshared vs. Datenbankserver
 | Fileshared                                                                                                                                                                 | Server                                                                                                              |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
@@ -123,8 +126,9 @@ Um zukunfstsicher zu planen entscheiden wir uns für einen MySQL Server, da dies
 
 #### Quellen der Daten
 
-- Programm, um Änderungsanträge einzureichen (Person, Account, Recht/Rolle, Begründung).
+- User können Rolle anfragen
 - Diese werden ebenfalls in der Datenbank hinterlegt und können im Admin-Programm angenomen/abgelehnt werden.
+- Admin kann Anfragen annehmen / abnehmen
 
 ---
 
@@ -139,3 +143,15 @@ Um zukunfstsicher zu planen entscheiden wir uns für einen MySQL Server, da dies
       D[Person] -- hat N ---> C[Rollen]
       C -- vergeben an N ---> D
 ```
+
+<hr>
+
+### Export der Zuweisungen in das JSON Format
+Die Rollenzuweisungen aller Personen können via eines Buttons in eine JSON-Datei mit folgendem Format exportiert werden:
+```
+  {
+    "name1" : ["rolle1", "rolle2", ...],
+    "name2" : ["rolle1", "rolle2", ...]
+  }
+```
+Da sowohl die Namen der Personen, als auch die Bezeichnungen der Rollen einzigartig sind, kann mit einfachen Strings gearbeitet werden.
