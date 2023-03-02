@@ -1,0 +1,11 @@
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\bin\Release\Database.exe.config
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\bin\Release\Database.exe
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\bin\Release\Database.pdb
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\obj\Release\Database.csproj.AssemblyReference.cache
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\obj\Release\Database.csproj.SuggestedBindingRedirects.cache
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\obj\Release\Database.Form1.resources
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\obj\Release\Database.Properties.Resources.resources
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\obj\Release\Database.csproj.GenerateResource.cache
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\obj\Release\Database.csproj.CoreCompileInputs.cache
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\obj\Release\Database.exe
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\obj\Release\Database.pdb

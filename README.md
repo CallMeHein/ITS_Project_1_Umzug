@@ -131,9 +131,11 @@ Um zukunfstsicher zu planen entscheiden wir uns für einen MySQL Server, da dies
 ### Entity-Relationship-Modell
 
 ```mermaid
-  %%{ init: { 'flowchart': { 'curve': '' } } }%%
+  %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
   graph LR;
-      A[Person]-- N --- B{Recht};
-      A -- N --- C{Anfrage};
-      B & C -- 1 --- D[Rolle]
+      A[Person]-- stellt N ---> B[Request]
+      B -- gestellt von 1 ---> A
+
+      D[Person] -- hat N ---> C[Rollen]
+      C -- vergeben an N ---> D
 ```
