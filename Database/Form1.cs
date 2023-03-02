@@ -4,6 +4,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Database {
     public partial class Form1 : Form {
@@ -526,6 +530,29 @@ namespace Database {
             cmd.CommandText = $"DELETE FROM requests WHERE id_request = {selectedRow[0]}";
             cmd.ExecuteNonQuery();
             AlleRequestsAnzeigen(null, null);
+        }
+
+        private void bExportJSON_Click(object sender, EventArgs e) {
+            Dictionary<string, List<string>> json_dict = new Dictionary<string, List<string>>();
+            // Sammelt alle Zuweisungen
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = this.mySqlConnection;
+            cmd.CommandText = "select personen.name, rollen.bezeichnung from zuweisungen inner join personen on zuweisungen.id_person = personen.id_person inner join rollen on zuweisungen.id_rolle = rollen.id_rolle";
+            MySqlDataReader zuweisungen = cmd.ExecuteReader();
+            while (zuweisungen.Read()) {
+                string[] data = new string[zuweisungen.FieldCount];
+                zuweisungen.GetValues(data);
+                if (json_dict.Keys.ToList().Contains(data[0])) {
+                    json_dict[data[0]].Add(data[1]);
+                }
+                else {
+                    json_dict[data[0]] = new List<string> { data[1] };
+                }
+            }
+
+            string json_string = JsonConvert.SerializeObject(json_dict, Formatting.Indented);
+            File.WriteAllText("../../../export.json", json_string);
+            zuweisungen.Close();
         }
     }
 }

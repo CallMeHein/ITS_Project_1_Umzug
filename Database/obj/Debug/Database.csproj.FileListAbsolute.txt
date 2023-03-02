@@ -73,3 +73,5 @@ C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\obj\Debug\Database.csproj
 C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\obj\Debug\Database.csproj.CopyComplete
 C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\obj\Debug\Database.exe
 C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\obj\Debug\Database.pdb
+C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\bin\Debug\Newtonsoft.Json.xml

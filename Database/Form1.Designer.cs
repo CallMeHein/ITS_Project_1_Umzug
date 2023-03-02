@@ -63,6 +63,7 @@
             this.lbUser = new System.Windows.Forms.Label();
             this.lbConnectionError = new System.Windows.Forms.Label();
             this.gbConnection = new System.Windows.Forms.GroupBox();
+            this.bExportJSON = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTabelle)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tpVerwaltung.SuspendLayout();
@@ -413,16 +414,27 @@
             this.gbConnection.TabIndex = 12;
             this.gbConnection.TabStop = false;
             // 
+            // bExportJSON
+            // 
+            this.bExportJSON.Location = new System.Drawing.Point(664, 510);
+            this.bExportJSON.Name = "bExportJSON";
+            this.bExportJSON.Size = new System.Drawing.Size(176, 23);
+            this.bExportJSON.TabIndex = 13;
+            this.bExportJSON.Text = "Zuweisungen exportieren (JSON)";
+            this.bExportJSON.UseVisualStyleBackColor = true;
+            this.bExportJSON.Click += new System.EventHandler(this.bExportJSON_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 511);
+            this.ClientSize = new System.Drawing.Size(849, 541);
+            this.Controls.Add(this.bExportJSON);
             this.Controls.Add(this.gbConnection);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.dgvTabelle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximumSize = new System.Drawing.Size(865, 550);
+            this.MaximumSize = new System.Drawing.Size(865, 580);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "Benutzerverwaltung (Admin)";
@@ -479,6 +491,7 @@
         private System.Windows.Forms.Button bAlleZuweisungenAnzeigen;
         private System.Windows.Forms.ToolTip ttPersonenComboBox;
         private System.Windows.Forms.Button bZuweisungEntfernen;
+        private System.Windows.Forms.Button bExportJSON;
     }
 }
 
