@@ -75,3 +75,5 @@ C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\obj\Debug\Database.exe
 C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\obj\Debug\Database.pdb
 C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Hein\Desktop\it.schule\SAE\Projekt_1\Database\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Megaport\Documents\ITS_PROJECT_UMZUG\ITS_Project_1_Umzug\Database\bin\Debug\Newtonsoft.Json.xml

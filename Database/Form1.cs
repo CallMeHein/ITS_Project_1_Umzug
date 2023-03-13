@@ -193,7 +193,7 @@ namespace Database {
             cmd.Connection = this.mySqlConnection;
             cmd.CommandText = "SELECT id_zuweisung, personen.id_person, personen.name, rollen.id_rolle, rollen.bezeichnung FROM ((zuweisungen INNER JOIN personen ON zuweisungen.id_person = personen.id_person) INNER JOIN rollen ON zuweisungen.id_rolle = rollen.id_rolle)";
             MySqlDataReader data = cmd.ExecuteReader();
-
+                
             DataReaderInDataGrid(data, 5);
 
             data.Close();
@@ -533,23 +533,31 @@ namespace Database {
         }
 
         private void bExportJSON_Click(object sender, EventArgs e) {
-            Dictionary<string, List<string>> json_dict = new Dictionary<string, List<string>>();
+            Dictionary<string, Dictionary<string, object>> json_dict = new Dictionary<string, Dictionary<string, object>>();
             // Sammelt alle Zuweisungen
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = this.mySqlConnection;
-            cmd.CommandText = "select personen.name, rollen.bezeichnung from zuweisungen inner join personen on zuweisungen.id_person = personen.id_person inner join rollen on zuweisungen.id_rolle = rollen.id_rolle";
+            cmd.CommandText = "select personen.id_person, personen.vorname, personen.nachname, rollen.bezeichnung from zuweisungen inner join personen on zuweisungen.id_person = personen.id_person inner join rollen on zuweisungen.id_rolle = rollen.id_rolle";
             MySqlDataReader zuweisungen = cmd.ExecuteReader();
+            // Iteriert über die Datensätze und erweitert das Dictionary
             while (zuweisungen.Read()) {
-                string[] data = new string[zuweisungen.FieldCount];
+                // Datensatz to Array
+                object[] data = new object[zuweisungen.FieldCount];
                 zuweisungen.GetValues(data);
-                if (json_dict.Keys.ToList().Contains(data[0])) {
-                    json_dict[data[0]].Add(data[1]);
+                // Wenn die ID der Person nicht bereits ein Key des Dictionaries ist, wird das dazugehörige Directory initialisiert
+                if (!json_dict.ContainsKey(data[0].ToString())) {
+                    json_dict[data[0].ToString()] = new Dictionary<string, object> {
+                        {"vorname", data[1]},
+                        {"nachname", data[2]},
+                        {"rollen", new List<string>{data[3].ToString()}}
+                    };
                 }
+                // Wenn die ID der Person bereits ein Key des Dictionaries ist, wird das die Rolle zu dem Rollen-Array hinzugefügt
                 else {
-                    json_dict[data[0]] = new List<string> { data[1] };
+                    ((List<string>)json_dict[data[0].ToString()]["rollen"]).Add(data[3].ToString());
                 }
             }
-
+            // Konvertiert das Dictionary-Objekt zu einem String im JSON-Format
             string json_string = JsonConvert.SerializeObject(json_dict, Formatting.Indented);
             File.WriteAllText("../../../export.json", json_string);
             zuweisungen.Close();
