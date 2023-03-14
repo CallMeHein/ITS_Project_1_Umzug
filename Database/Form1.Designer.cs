@@ -212,8 +212,7 @@
             this.bAlleZuweisungenAnzeigen.Size = new System.Drawing.Size(116, 34);
             this.bAlleZuweisungenAnzeigen.TabIndex = 11;
             this.bAlleZuweisungenAnzeigen.Text = "Alle Zuweisungen anzeigen";
-            this.ttRolleZuweisen.SetToolTip(this.bAlleZuweisungenAnzeigen, "Weist der gewählten Person die gewählt Rolle zu, wenn sie diese nicht bereits bes" +
-        "itzt.");
+            this.ttRolleZuweisen.SetToolTip(this.bAlleZuweisungenAnzeigen, "Zeigt alle Zuweisungen an");
             this.bAlleZuweisungenAnzeigen.UseVisualStyleBackColor = true;
             this.bAlleZuweisungenAnzeigen.Click += new System.EventHandler(this.AlleZuweisungenAnzeigen);
             // 
@@ -224,8 +223,7 @@
             this.bZuweisungEntfernen.Size = new System.Drawing.Size(116, 21);
             this.bZuweisungEntfernen.TabIndex = 12;
             this.bZuweisungEntfernen.Text = "Zuweisung entfernen";
-            this.ttRolleZuweisen.SetToolTip(this.bZuweisungEntfernen, "Weist der gewählten Person die gewählt Rolle zu, wenn sie diese nicht bereits bes" +
-        "itzt.");
+            this.ttRolleZuweisen.SetToolTip(this.bZuweisungEntfernen, "Entfernt die gewählte Zuweisung");
             this.bZuweisungEntfernen.UseVisualStyleBackColor = true;
             this.bZuweisungEntfernen.Click += new System.EventHandler(this.bZuweisungEntfernen_Click);
             // 

@@ -1,13 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Microsoft.VisualBasic;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Database {
     public partial class Form1 : Form {
@@ -85,7 +83,7 @@ namespace Database {
             return id_person;
 
         }
-        
+
         /// <summary>
         /// Liefert die ID der angegebenen Rolle
         /// </summary>
@@ -114,7 +112,7 @@ namespace Database {
         /// <param name="e"></param>
         private void bVerbindungHerstellen_Click(object sender, EventArgs e) {
             // Prüft, ob alle nötigen Felder ausgefüllt sind
-            if(this.tbServer.Text == "" || this.tbDatenbank.Text == "" || this.tbUser.Text == "" || this.tbPasswort.Text == "") {
+            if (this.tbServer.Text == "" || this.tbDatenbank.Text == "" || this.tbUser.Text == "" || this.tbPasswort.Text == "") {
                 this.lbConnectionError.ForeColor = Color.Red;
                 this.lbConnectionError.Text = "Alle Felder müssen ausgefüllt sein.";
                 return;
@@ -127,7 +125,7 @@ namespace Database {
                 this.mySqlConnection.Open();
             }
             // Fehlermeldung, falls die Verbindung fehlschlägt
-            catch(MySqlException) {
+            catch (MySqlException) {
                 this.lbConnectionError.ForeColor = Color.Red;
                 this.lbConnectionError.Text = "Fehler beim Verbinden mit der Datenbank.\r\nBitte Eingaben prüfen.";
                 return;
@@ -174,7 +172,7 @@ namespace Database {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AllesAuswaehlen(object sender, EventArgs e) {
-            if(sender.GetType() == typeof(TextBox)) {
+            if (sender.GetType() == typeof(TextBox)) {
                 TextBox tb = (TextBox)sender;
                 tb.SelectAll();
             }
@@ -193,7 +191,7 @@ namespace Database {
             cmd.Connection = this.mySqlConnection;
             cmd.CommandText = "SELECT id_zuweisung, personen.id_person, personen.name, rollen.id_rolle, rollen.bezeichnung FROM ((zuweisungen INNER JOIN personen ON zuweisungen.id_person = personen.id_person) INNER JOIN rollen ON zuweisungen.id_rolle = rollen.id_rolle)";
             MySqlDataReader data = cmd.ExecuteReader();
-                
+
             DataReaderInDataGrid(data, 5);
 
             data.Close();
@@ -232,7 +230,7 @@ namespace Database {
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = this.mySqlConnection;
             cmd.CommandText = "SELECT id_zuweisung, personen.id_person, personen.name, rollen.id_rolle, rollen.bezeichnung FROM ((zuweisungen INNER JOIN personen ON zuweisungen.id_person = personen.id_person) INNER JOIN rollen ON zuweisungen.id_rolle = rollen.id_rolle)";
-            
+
             // Wenn eine Person gewählt wurde, soll nach ihr gefiltert werden
             if (name != "") {
                 cmd.CommandText += $" WHERE personen.id_person = {id_person}";
@@ -257,7 +255,7 @@ namespace Database {
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = this.mySqlConnection;
             cmd.CommandText = "SELECT id_zuweisung, personen.id_person, personen.name, rollen.id_rolle, rollen.bezeichnung FROM ((zuweisungen INNER JOIN personen ON zuweisungen.id_person = personen.id_person) INNER JOIN rollen ON zuweisungen.id_rolle = rollen.id_rolle)";
-            
+
             // Wenn eine Rolle gewählt wurde, soll nach ihr gefiltert werden
             if (bezeichnung != "") {
                 cmd.CommandText += $" WHERE rollen.id_rolle = {id_rolle}";
@@ -290,7 +288,7 @@ namespace Database {
             }
 
             string[] neue_person_arr = neue_person.Replace(", ", ",").Split(',');
-            
+
             // Der eingegebene Name ist im falschen Format
             if (neue_person_arr.Length != 2) {
                 MessageBox.Show("Eingegebener Name ist nicht im Format 'Nachname, Vorname'", error);
@@ -347,7 +345,7 @@ namespace Database {
                 MessageBox.Show("Die angegebene Person existiert nicht", "Fehler beim Löschen einer Person");
                 return;
             }
-            
+
             // Bestätigungs-Dialog
             var confirmation = MessageBox.Show($"Soll die Person '{person}', sowie alle mit ihr assoziierten \r\nDatensätze wirklich gelöscht werden?", "Bestätigung", MessageBoxButtons.YesNo);
             if (confirmation == DialogResult.No) {
@@ -363,7 +361,7 @@ namespace Database {
             cmd.CommandText = $"DELETE FROM zuweisungen WHERE id_person = '{id_person}'";
             cmd.ExecuteNonQuery();
             // Löscht den 'Person' Datensatz
-            cmd.CommandText = $"DELETE FROM personen WHERE name = '{person}'";  
+            cmd.CommandText = $"DELETE FROM personen WHERE name = '{person}'";
             cmd.ExecuteNonQuery();
             // Aktualisiert die GUI
             VerwaltungAktualisieren();
@@ -449,7 +447,7 @@ namespace Database {
                 return;
             }
             data.Close();
-            
+
             // Zuweisung wird erstellt
             cmd.CommandText = $"INSERT INTO zuweisungen (id_person, id_rolle) VALUES ({id_person},{id_rolle})";
             cmd.ExecuteNonQuery();

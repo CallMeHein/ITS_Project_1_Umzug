@@ -1,5 +1,16 @@
 # Projekt: Umzug
 
+## Inhalt
+1. [Netzwerk](#teil-1-netzwerk)  
+  1.1. [Anforderungsanalyse](#anforderungsanalyse)  
+  1.2. [Netzplan](#netzplan)  
+  1.3. [Demonstrationsprototyp PaketTracer](#demonstrationsprototyp-pakettracer)
+2. [Datenbank](#teil-2-datenbank)  
+  2.1. [Anforderungsanalyse](#anforderungsanalyse-1)  
+  2.2. [Auswahl der Datenbank](#auswahl-der-datenbank)  
+  2.3. [Entity-Relationship-Modell](#entity-relationship-modell)  
+  2.4. [Export der Zuweisungen in das JSON Format](#export-der-zuweisungen-in-das-json-format)
+3. [Benutzerhandbuch](#benutzerhandbuch)
 ## Teil 1: Netzwerk
 
 ---
@@ -122,16 +133,6 @@ Um zukunfstsicher zu planen entscheiden wir uns für einen MySQL Server, da dies
 
 ---
 
-### Ermittlung und Beschreibung der notwendigen Daten
-
-#### Quellen der Daten
-
-- User können Rolle anfragen
-- Diese werden ebenfalls in der Datenbank hinterlegt und können im Admin-Programm angenomen/abgelehnt werden.
-- Admin kann Anfragen annehmen / abnehmen
-
----
-
 ### Entity-Relationship-Modell
 
 ```mermaid
@@ -150,8 +151,30 @@ Um zukunfstsicher zu planen entscheiden wir uns für einen MySQL Server, da dies
 Die Rollenzuweisungen aller Personen können via eines Buttons in eine JSON-Datei mit folgendem Format exportiert werden:
 ```
   {
-    "name1" : ["rolle1", "rolle2", ...],
-    "name2" : ["rolle1", "rolle2", ...]
+    "id1": {
+      "vorname": "vorname1",
+      "nachname": "nachname1",
+      "rollen": ["rolle1", "rolle2", ...]
+    },
+
+    "id2": {
+      "vorname": "vorname2",
+      "nachname": "nachname2",
+      "rollen": ["rolle1", "rolle2", ...]
+    }
   }
 ```
-Da sowohl die Namen der Personen, als auch die Bezeichnungen der Rollen einzigartig sind, kann mit einfachen Strings gearbeitet werden.
+Da die Bezeichnungen der Rollen einzigartig sind, kann mit einfach lesbaren Strings gearbeitet werden.
+
+<hr>
+
+## Benutzerhandbuch
+
+- Login
+  - Server, Datenbank, Benutzername, und Passwort in jeweilige Felder eintragen
+  - Login bestätigen.
+  - Bei erfolgreichem Login wird die restliche Benutzeroberfläche freigeschaltet
+- Bearbeiten der Daten
+  - In den ComboBoxen kann eine bestimmte Person bzw. eine bestimmte Rolle ausgewählt werden.
+  - Über die jeweiligen Buttons können alle Zuweisungen, die die gewählte Person bzw. Rolle beinhalten angezeigt werden.
+  - Über die weiteren Buttons können neue oder bereits bestehende Personen, Rollen, oder Zuweisungen angelegt bzw. gelöscht werden.
